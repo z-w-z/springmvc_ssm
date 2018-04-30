@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author ZWZ
  */
-public class ItemsCustomImpl implements ItemsService {
+public class ItemsServiceImpl implements ItemsService {
     @Autowired
     private ItemsMappperCustom itemsMappperCustom;
     public List<ItemsCustom> findItemsList(ItemsQueryVO itemsQueryVO) throws Exception {
