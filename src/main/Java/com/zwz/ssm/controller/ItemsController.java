@@ -1,6 +1,5 @@
 package com.zwz.ssm.controller;
 
-import com.zwz.ssm.po.Items;
 import com.zwz.ssm.po.ItemsCustom;
 import com.zwz.ssm.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,32 @@ public class ItemsController {
         modelAndView.setViewName("items/itemsList");
 
         return modelAndView;
+    }
+    //商品信息修改页面显示
+    @RequestMapping("/editItems")
+    public ModelAndView editItems()throws Exception{
+        //调用service根据商品id查询商品信息
+        ItemsCustom itemsCustom = itemsService.findItemsById(1);
+        //返回modelAndView
+        ModelAndView modelAndView = new ModelAndView();
+        //将商品信息放到model
+        modelAndView.addObject("itemsCustom", itemsCustom);
+        //商品修改页面
+        modelAndView.setViewName("items/editItems");
+        return modelAndView;
 
+    }
+
+    //商品信息修改提交
+    @RequestMapping("/editItemsSubmit")
+    public String editItemsSubmit(HttpServletRequest request, Integer id, ItemsCustom itemsCustom)throws Exception{
+        //调用service更新商品信息，页面需要将商品信息传到此方法
+        itemsService.updateItems(id, itemsCustom);
+        //重定向到商品查询列表
+		//return "redirect:queryItems.action";
+        //页面转发
+        //return "forward:queryItems.action";
+        return "success";
     }
 
 }
