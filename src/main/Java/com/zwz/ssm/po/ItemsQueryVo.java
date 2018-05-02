@@ -1,6 +1,6 @@
 package com.zwz.ssm.po;
 
-public class ItemsQueryVO {
+public class ItemsQueryVo {
     //商品信息
     private Items items;
     //为了系统可扩展性，对原始生成的po进行扩展

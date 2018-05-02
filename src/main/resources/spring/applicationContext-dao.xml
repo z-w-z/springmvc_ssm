@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -14,8 +14,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-
-    <!--加载db.properties文件中的内容，db.properties文件中key命名要有一定的特殊规则-->
+<!--加载db.properties文件中的内容，db.properties文件中key命名要有一定的特殊规则-->
     <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
 
     <!--配置数据源-->
@@ -38,19 +37,17 @@
         <property name="acquireRetryAttempts" value="2" />
     </bean>
 
-    <!--sqlsessionFactory-->
+    <!-- sqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!--数据库连接池-->
-        <property name="dataSource" ref="dataSource"></property>
-        <!--加载mybatis的全局配置文件-->
-        <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml"></property>
+        <!-- 数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 加载mybatis的全局配置文件 -->
+        <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
     </bean>
-
-    <!--mapper扫描器-->
+    <!-- mapper扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
         <property name="basePackage" value="com.zwz.ssm.mapper"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
-
 </beans>

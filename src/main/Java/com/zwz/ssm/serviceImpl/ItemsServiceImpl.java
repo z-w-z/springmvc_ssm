@@ -1,20 +1,27 @@
 package com.zwz.ssm.serviceImpl;
 
-import com.zwz.ssm.mapper.ItemsMappperCustom;
-import com.zwz.ssm.po.ItemsQueryVO;
+import com.zwz.ssm.mapper.ItemsMapper;
+import com.zwz.ssm.mapper.ItemsMapperCustom;
+import com.zwz.ssm.po.ItemsQueryVo;
 import com.zwz.ssm.po.ItemsCustom;
 import com.zwz.ssm.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * @author ZWZ
- */
-public class ItemsServiceImpl implements ItemsService {
+
+public class ItemsServiceImpl implements ItemsService{
+
     @Autowired
-    private ItemsMappperCustom itemsMappperCustom;
-    public List<ItemsCustom> findItemsList(ItemsQueryVO itemsQueryVO) throws Exception {
-        return itemsMappperCustom.findItemsList(itemsQueryVO);
+    private ItemsMapperCustom itemsMapperCustom;
+
+    @Autowired
+    private ItemsMapper itemsMapper;
+
+    @Override
+    public List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo)
+            throws Exception {
+        //通过ItemsMapperCustom查询数据库
+        return itemsMapperCustom.findItemsList(itemsQueryVo);
     }
 }
