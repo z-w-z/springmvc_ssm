@@ -41,7 +41,7 @@ public class ItemsServiceImpl implements ItemsService{
     }
 
     @Override
-    public void updateItems(Integer id, ItemsCustom itemsCustom) throws Exception {
+    public void updateItems(Integer id, ItemsQueryVo itemsCustom) throws Exception {
         //添加业务校验，通常在service接口对关键参数进行校验
         //校验 id是否为空，如果为空抛出异常
 

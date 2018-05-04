@@ -13,6 +13,7 @@
 查询条件：
 <table width="100%" border=1>
 <tr>
+	<td><input name=""/></td>
 <td><input type="submit" value="查询"/></td>
 </tr>
 </table>

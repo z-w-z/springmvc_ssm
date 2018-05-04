@@ -1,10 +1,15 @@
 package com.zwz.ssm.controller;
 
 import com.zwz.ssm.po.ItemsCustom;
+import com.zwz.ssm.po.ItemsQueryVo;
 import com.zwz.ssm.service.ItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,13 +26,13 @@ public class ItemsController {
 
     // 商品查询
     @RequestMapping("/queryItems")
-    public ModelAndView queryItems(HttpServletRequest request) throws Exception {
+    public ModelAndView queryItems(HttpServletRequest request ,ItemsQueryVo itemsQueryVo) throws Exception {
         //测试forward后request是否可以共享
 
         System.out.println(request.getParameter("id"));
 
         // 调用service查找 数据库，查询商品列表
-        List<ItemsCustom> itemsList = itemsService.findItemsList(null);
+        List<ItemsCustom> itemsList = itemsService.findItemsList(itemsQueryVo);
 
         // 返回ModelAndView
         ModelAndView modelAndView = new ModelAndView();
@@ -43,10 +48,10 @@ public class ItemsController {
         return modelAndView;
     }
     //商品信息修改页面显示
-    @RequestMapping("/editItems")
-    public ModelAndView editItems()throws Exception{
+    @RequestMapping(value="/editItems" ,method ={RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView editItems(Model model, @RequestParam(value = "id",required =true) Integer items_id )throws Exception{
         //调用service根据商品id查询商品信息
-        ItemsCustom itemsCustom = itemsService.findItemsById(1);
+        ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
         //返回modelAndView
         ModelAndView modelAndView = new ModelAndView();
         //将商品信息放到model
@@ -59,14 +64,14 @@ public class ItemsController {
 
     //商品信息修改提交
     @RequestMapping("/editItemsSubmit")
-    public String editItemsSubmit(HttpServletRequest request, Integer id, ItemsCustom itemsCustom)throws Exception{
+    public String editItemsSubmit(HttpServletRequest request, Integer id, ItemsQueryVo itemsQueryVo)throws Exception{
         //调用service更新商品信息，页面需要将商品信息传到此方法
-        itemsService.updateItems(id, itemsCustom);
+        itemsService.updateItems(id,itemsQueryVo);
         //重定向到商品查询列表
 		//return "redirect:queryItems.action";
         //页面转发
-        //return "forward:queryItems.action";
-        return "success";
+        return "forward:queryItems.action";
+       // return "success";
     }
 
 }
