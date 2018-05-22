@@ -9,7 +9,13 @@
 <title>修改商品信息</title>
 
 </head>
-<body> 
+<body>
+<!-- 显示错误信息 -->
+<c:if test="${allErrors!=null }">
+    <c:forEach items="${allErrors }" var="error">
+        ${ error.defaultMessage}<br/>
+    </c:forEach>
+</c:if>
 
 <form id="itemForm" action="${pageContext.request.contextPath }/items/editItemsSubmit.action" method="post" >
 <input type="hidden" name="id" value="${itemsCustom.id }"/>

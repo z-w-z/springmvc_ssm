@@ -76,10 +76,28 @@
     <servlet-api.version>3.1.0</servlet-api.version>
     <junit.version>4.12</junit.version>
     <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+    <hibernate-validator.version>4.3.1.Final</hibernate-validator.version>
   </properties>
 
   <dependencies>
-      <!--日志管理-->
+      <!--hibernate校验框架-->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>${hibernate-validator.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.el</groupId>
+      <artifactId>javax.el-api</artifactId>
+      <version>2.2.4</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>javax.el</artifactId>
+      <version>2.2.4</version>
+    </dependency>
+
+    <!--日志管理-->
     <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>

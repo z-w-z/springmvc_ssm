@@ -1,13 +1,15 @@
 package com.zwz.ssm.po;
 
+import java.util.Date;
+
 public class User {
     private Integer id;
 
     private String username;
 
-    private String sex;
+    private Date birthday;
 
-    private String birthday;
+    private String sex;
 
     private String address;
 
@@ -27,20 +29,20 @@ public class User {
         this.username = username == null ? null : username.trim();
     }
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public String getSex() {
         return sex;
     }
 
     public void setSex(String sex) {
         this.sex = sex == null ? null : sex.trim();
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday == null ? null : birthday.trim();
     }
 
     public String getAddress() {

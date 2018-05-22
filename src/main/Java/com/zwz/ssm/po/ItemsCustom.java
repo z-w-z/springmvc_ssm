@@ -1,5 +1,8 @@
 package com.zwz.ssm.po;
 
+
 public class ItemsCustom extends Items {
-    //添加商品信息的扩展属性
+	
+	//添加商品信息的扩展属性
+
 }

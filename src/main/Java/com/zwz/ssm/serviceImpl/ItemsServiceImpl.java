@@ -1,5 +1,6 @@
 package com.zwz.ssm.serviceImpl;
 
+import com.zwz.ssm.exception.CustomException;
 import com.zwz.ssm.mapper.ItemsMapper;
 import com.zwz.ssm.mapper.ItemsMapperCustom;
 import com.zwz.ssm.po.Items;
@@ -20,6 +21,7 @@ public class ItemsServiceImpl implements ItemsService{
     @Autowired
     private ItemsMapper itemsMapper;
 
+
     @Override
     public List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo)
             throws Exception {
@@ -30,18 +32,27 @@ public class ItemsServiceImpl implements ItemsService{
     @Override
     public ItemsCustom findItemsById(Integer id) throws Exception {
         Items items = itemsMapper.selectByPrimaryKey(id);
+        if(items == null){
+            throw  new CustomException("修改的商品信息不存在");
+        }
+
         //中间对商品信息进行业务处理
         //....
         //返回ItemsCustom
-        ItemsCustom itemsCustom = new ItemsCustom();
-        //将items的属性值拷贝到itemsCustom
-        BeanUtils.copyProperties(items, itemsCustom);
+        ItemsCustom itemsCustom = null;
+        if(itemsCustom!=null){
+             itemsCustom = new ItemsCustom();
+
+            //将items的属性值拷贝到itemsCustom
+            BeanUtils.copyProperties(items, itemsCustom);
+        }
+
 
         return itemsCustom;
     }
 
     @Override
-    public void updateItems(Integer id, ItemsQueryVo itemsCustom) throws Exception {
+    public void updateItems(Integer id, ItemsCustom itemsCustom) throws Exception {
         //添加业务校验，通常在service接口对关键参数进行校验
         //校验 id是否为空，如果为空抛出异常
 
@@ -51,6 +62,10 @@ public class ItemsServiceImpl implements ItemsService{
         itemsMapper.updateByPrimaryKeyWithBLOBs(itemsCustom);
     }
 
+    @Override
+    public void deleteByPrimaryKey(Integer[] items_id) throws Exception {
+
+    }
 
 
 }
