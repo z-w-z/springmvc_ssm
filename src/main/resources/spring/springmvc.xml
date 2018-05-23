@@ -80,4 +80,10 @@
     <!--全局异常处理器-->
 
     <bean class="com.zwz.ssm.exception.CustomExceptionResolver"/>
+    <!--文件上传-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
+    </bean>
 </beans>
